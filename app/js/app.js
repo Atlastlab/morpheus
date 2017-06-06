@@ -1,41 +1,35 @@
-import Sprinkhaan from './Sprinkhaan.js';
+import AtlasApi from './core/AtlasApi.js';
 
-let sprinkhaan = new Sprinkhaan();
+let api = new AtlasApi({
+    baseUrl: 'http://atlas.daniel/api/v1'
+});
 
-let map = L.map('map', {
-    attributionControl: false
-}).setView([51.7373, 4.2840], 14);
-L.tileLayer('http://tilemill.studiofonkel.nl/style/{z}/{x}/{y}.png?id=tmstyle:///home/administrator/styles/haringvliet-2017.tm2&j2oul3e6', {
-    detectRetina: true
-}).addTo(map);
+let fetchPage = api.get('building_page', 2);
 
-let marker = L.marker([51.7373, 4.2840]).addTo(map);
-//
-// let blockZoom = false;
-//
-// sprinkhaan.on('expanded', () => {
-//     blockZoom = true;
-// });
-//
-// sprinkhaan.on('collapsed', () => {
-//    setTimeout(() => {
-//        blockZoom = false;
-//    }, 1000)
-// });
-//
-// map.on('zoomstart', (event) => {
-//     if (blockZoom) {
-//         event.preventDefault();
-//     }
-// });
+let createComponentsMarkup = function (components) {
+    let markup = '';
 
-marker.on('click', () => {
-    console.log(sprinkhaan.state)
+    components.forEach((component, delta) => {
+        let currentDepth = parseInt(component.depth);
+        let nextDepth = components[delta + 1] ? parseInt(components[delta + 1].depth) : 0;
 
-    if (sprinkhaan.state === 'collapsed') {
-        sprinkhaan.hide();
-    }
-    else if (sprinkhaan.state === 'hidden') {
-        sprinkhaan.show();
-    }
+        markup += `<component id="${component.target_id}">`;
+
+        if (currentDepth === nextDepth) {
+            markup += `</component>\n`;
+        }
+
+        if (nextDepth < currentDepth) {
+            for (let i = currentDepth; i >= nextDepth; i--) {
+                markup += `</component>\n`;
+            }
+        }
+    });
+
+    return markup;
+};
+
+fetchPage.then((page) => {
+    let markup = createComponentsMarkup(page.components);
+    document.body.innerHTML = markup;
 });
