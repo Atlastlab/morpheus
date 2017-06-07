@@ -46,6 +46,8 @@ SystemJS.config({
     "github:*/*.json"
   ],
   map: {
+    "jquery": "npm:jquery@3.2.1",
+    "OwlCarousel2/OwlCarousel2": "github:OwlCarousel2/OwlCarousel2@2.2.1",
     "assert": "npm:jspm-nodelibs-assert@0.2.1",
     "axios": "npm:axios@0.16.2",
     "buffer": "npm:jspm-nodelibs-buffer@0.2.3",
