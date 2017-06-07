@@ -15,6 +15,7 @@ class AtlasApi extends EventEmitter {
         return fetch(this.options.baseUrl).then(function(response) {
             return response.json();
         }).then(function(appData) {
+
             if (appData[type][id]) {
                 return appData[type][id];
             }
