@@ -16,14 +16,29 @@ class Morpheus extends EventEmitter {
         { path: '/building/:id', component: building(this) }
     ];
 
+    components = [
+        'sprinkhaan'
+    ];
+
     constructor () {
         super();
         Vue.use(VueRouter);
+
+        this.registerComponents();
 
         this.settings = settings;
         this.api = new Api({ baseUrl: this.settings.api });
         this.router = new VueRouter({ routes: this.routes });
         this.vueRoot = new Vue({ router: this.router }).$mount('#app');
+    }
+
+    registerComponents () {
+        this.components.forEach((componentName) => {
+            Vue.component(componentName, () => System.import('./js/components/' + componentName + '.js')
+            .then((component) => {
+                return component.default(this);
+            }));
+        });
     }
 
 }

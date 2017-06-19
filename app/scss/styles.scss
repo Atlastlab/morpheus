@@ -1,1 +1,13 @@
+@import '../lib/github/studio-fonkel/sprinkhaan@master/src/scss/sprinkhaan';
 @import '../lib/github/OwlCarousel2/OwlCarousel2@2.2.1/src/scss/owl.carousel.scss';
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+}
