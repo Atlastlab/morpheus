@@ -2,11 +2,12 @@
 
 var gulp = require('gulp');
 var reload = global.browserSync.reload;
+var settings = require('./../app/settings.json');
 
 gulp.task('serve', ['css'], function () {
     global.browserSync.init({
         server: {
-            baseDir: global.paths.src
+            baseDir: global.paths.src,
         },
         ghostMode: false
     });

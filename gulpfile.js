@@ -10,7 +10,7 @@ global.paths = {
     'html': './app/**/*.html',
     'scss': './app/scss/**/*.scss',
     'css': './app/css',
-    'js': ['./app/**/*.js', '!./app/lib'],
+    'js': ['./app/**/*.js', '!./app/lib', '!./app/**/node_modules/**/*'],
     'src': './app'
 };
 

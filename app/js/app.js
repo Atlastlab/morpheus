@@ -4,6 +4,7 @@ import Vue from 'vue/dist/vue.js';
 import VueRouter from 'vue-router';
 import Api from 'morpheus/core/Api.js';
 import building from 'morpheus/routes/building.js';
+import map from 'morpheus/routes/map.js';
 
 class Morpheus extends EventEmitter {
 
@@ -13,7 +14,12 @@ class Morpheus extends EventEmitter {
     vueRoot = null;
 
     routes = [
-        { path: '/building/:id', component: building(this) }
+        {
+            path: '/map', component: map(this),
+            children: [
+                { path: 'building/:id', component: building(this) }
+            ]
+        },
     ];
 
     components = [

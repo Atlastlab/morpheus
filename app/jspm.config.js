@@ -52,6 +52,7 @@ SystemJS.config({
     "github:*/*.json"
   ],
   map: {
+    "mapbox/mapbox-gl-js": "github:mapbox/mapbox-gl-js@0.38.0",
     "json": "github:systemjs/plugin-json@0.3.0",
     "vue-router": "npm:vue-router@2.5.3",
     "studio-fonkel/sprinkhaan": "github:studio-fonkel/sprinkhaan@master",
