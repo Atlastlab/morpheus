@@ -1,10 +1,16 @@
 SystemJS.config({
   paths: {
     "github:": "lib/github/",
-    "npm:": "lib/npm/"
+    "npm:": "lib/npm/",
+    "morpheus/": "js/"
   },
   browserConfig: {
     "baseURL": "/"
+  },
+  meta: {
+    "*.css": {
+      "loader": "css"
+    }
   },
   devConfig: {
     "map": {
@@ -46,6 +52,10 @@ SystemJS.config({
     "github:*/*.json"
   ],
   map: {
+    "json": "github:systemjs/plugin-json@0.3.0",
+    "vue-router": "npm:vue-router@2.5.3",
+    "studio-fonkel/sprinkhaan": "github:studio-fonkel/sprinkhaan@master",
+    "css": "github:systemjs/plugin-css@0.1.35",
     "jquery": "npm:jquery@3.2.1",
     "OwlCarousel2/OwlCarousel2": "github:OwlCarousel2/OwlCarousel2@2.2.1",
     "assert": "npm:jspm-nodelibs-assert@0.2.1",
@@ -357,6 +367,12 @@ SystemJS.config({
       "map": {
         "readable-stream": "npm:readable-stream@2.2.11",
         "pako": "npm:pako@0.2.9"
+      }
+    },
+    "github:studio-fonkel/sprinkhaan@master": {
+      "map": {
+        "zingchart/zingtouch": "github:zingchart/zingtouch@1.0.5",
+        "web-animations/web-animations-js": "github:web-animations/web-animations-js@2.2.5"
       }
     }
   }

@@ -1,23 +1,25 @@
 import EventEmitter from 'events';
-import Vue from 'vue/dist/vue.js';
 
 class Components extends EventEmitter {
 
     registeredComponents = [];
+    prefix = 'atlast-';
 
-    constructor (components, data) {
+    constructor (components, container, vue) {
         super();
         this.components = components;
-        this.data = data;
+        this.vue = vue;
+        this.container = container;
     }
 
-    registerComponent (type) {
+    registerVueComponent (type) {
         if (!this.registeredComponents.includes(type)) {
-            Vue.component(
-                'atlast-' + type,
-                () => System.import('./js/components/' + type + '.js')
-                .then((component) => component.default(this.data))
-            );
+            this.registeredComponents.push(type);
+
+            this.vue.component(this.prefix + type, () => System.import('./js/components/' + type + '.js')
+            .then((component) => {
+                return component.default(this.container);
+            }));
         }
     }
 
@@ -26,20 +28,19 @@ class Components extends EventEmitter {
         let typesStack = [];
 
         this.components.forEach((component, delta) => {
-
-            this.registerComponent(component.type);
+            this.registerVueComponent(component.type);
 
             let currentDepth = parseInt(component.depth);
             let nextDepth = this.components[delta + 1] ? parseInt(this.components[delta + 1].depth) : 0;
 
-            markup += `<atlast-${component.type} component-id="${component.target_id}">`;
+            markup += `<${this.prefix}${component.type} component-id="${component.target_id}">`;
 
             if (nextDepth > currentDepth) {
                 typesStack.push(component.type)
             }
 
             if (currentDepth === nextDepth) {
-                markup += `</atlast-${component.type}>`;
+                markup += `</${this.prefix}${component.type}>`;
             }
 
             if (nextDepth < currentDepth) {
@@ -47,11 +48,11 @@ class Components extends EventEmitter {
                 for (let i = currentDepth; i >= nextDepth; i--) {
 
                     if (counter) {
-                        markup += `</atlast-${typesStack[0]}>`;
+                        markup += `</${this.prefix}${typesStack[0]}>`;
                         typesStack.splice(typesStack.length - 1, 1);
                     }
                     else {
-                        markup += `</atlast-${component.type}>`;
+                        markup += `</${this.prefix}${component.type}>`;
                     }
 
                     counter++;
@@ -59,9 +60,8 @@ class Components extends EventEmitter {
             }
         });
 
-        return markup;
+        return `<div class="components-wrapper">${markup}</div>`;
     }
-
 }
 
 export default Components;

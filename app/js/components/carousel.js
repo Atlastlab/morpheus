@@ -1,17 +1,17 @@
 import $ from 'jquery';
 import 'OwlCarousel2/OwlCarousel2';
 
-export default function (api) {
+export default function () {
 
     return {
         props: ['component-id'],
         mounted: function () {
             this.slider = $(this.$el).owlCarousel({
                 items: 1,
-                nav: true,
+                autoHeight: true
             });
         },
-        template: '<div class="carousel"><slot></slot></div>'
+        template: '<div class="owl-carousel"><slot></slot></div>'
     }
 
 };
