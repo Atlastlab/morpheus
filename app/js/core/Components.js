@@ -1,24 +1,24 @@
 import EventEmitter from 'events';
+import Vue from 'vue/dist/vue.js';
 
 class Components extends EventEmitter {
 
     registeredComponents = [];
     prefix = 'atlast-';
 
-    constructor (components, container, vue) {
+    constructor (components, morpheus) {
         super();
         this.components = components;
-        this.vue = vue;
-        this.container = container;
+        this.morpheus = morpheus;
     }
 
     registerVueComponent (type) {
         if (!this.registeredComponents.includes(type)) {
             this.registeredComponents.push(type);
 
-            this.vue.component(this.prefix + type, () => System.import('./js/components/' + type + '.js')
+            Vue.component(this.prefix + type, () => System.import('./js/components/' + type + '.js')
             .then((component) => {
-                return component.default(this.container);
+                return component.default(this.morpheus);
             }));
         }
     }

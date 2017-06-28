@@ -1,10 +1,10 @@
-export default function (api) {
+export default function (morpheus) {
 
     return {
         props: ['component-id'],
         data: function () {
-            api.get('image',  this._props.componentId).then((response) => {
-                this.url = 'http://atlas.daniel/' + response.url;
+            morpheus.api.get('image',  this._props.componentId).then((response) => {
+                this.url = morpheus.settings.api + response.url;
             });
 
             return {

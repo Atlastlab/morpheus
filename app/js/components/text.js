@@ -1,9 +1,9 @@
-export default function (api) {
+export default function (morpheus) {
 
     return {
         props: ['component-id'],
         data: function () {
-            api.get('text',  this._props.componentId).then((response) => {
+            morpheus.api.get('text',  this._props.componentId).then((response) => {
                 this.text = response.value;
             });
 

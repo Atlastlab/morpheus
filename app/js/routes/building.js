@@ -9,7 +9,7 @@ let building = function (morpheus) {
         </sprinkhaan>`,
         beforeRouteEnter (to, from, next) {
             morpheus.api.get('building_page', to.params.id).then((buildingPage) => {
-                let componentsMarkup = new Components(buildingPage.components, morpheus.api, Vue).toNestedMarkup();
+                let componentsMarkup = new Components(buildingPage.components, morpheus).toNestedMarkup();
                 next(vm => {
                     vm.title = buildingPage.title;
                     vm.image = morpheus.settings.api + buildingPage.image;
