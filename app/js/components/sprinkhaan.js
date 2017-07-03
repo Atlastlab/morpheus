@@ -5,9 +5,11 @@ export default function (morpheus) {
     return {
         props: ['youtube', 'title', 'icon'],
         mounted: function () {
-            this.sprinkhaan = new Sprinkhaan({
-                scrollWheelEnabled: false
-            }).show();
+            setTimeout(() => {
+                morpheus.sprinkhaan = new Sprinkhaan({
+                    scrollWheelEnabled: false
+                }).show();
+            }, 100);
         },
         template: `<div class="sprinkhaan-container" data-state="collapsed" id="sprinkhaan">
             <div class="sprinkhaan-header is-sticky">{{ title }}</div>

@@ -1,6 +1,7 @@
 import Vue from 'vue/dist/vue.js';
 import 'FortAwesome/Font-Awesome/css/font-awesome.css!';
 import Components from 'morpheus/core/Components.js';
+import $ from 'jquery';
 
 let building = function (morpheus) {
     return {
@@ -14,10 +15,22 @@ let building = function (morpheus) {
                 next(vm => {
                     vm.title = buildingPage.title;
                     vm.icon = buildingPage.icon;
-                    vm.image = morpheus.settings.api + buildingPage.image;
+                    vm.image = buildingPage.image;
                     vm.componentsMarkup = Vue.extend({ template: componentsMarkup })
                 });
             });
+        },
+        beforeRouteLeave (to, from, next) {
+            if (morpheus.sprinkhaan) {
+                morpheus.sprinkhaan.hide(() => {
+                    morpheus.sprinkhaan.destroy(() => {
+                        next();
+                    });
+                })
+            }
+            else {
+                next();
+            }
         },
         data () {
             return {

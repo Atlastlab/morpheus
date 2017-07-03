@@ -17,6 +17,8 @@ let map = function (morpheus) {
                         "sources": {},
                         "layers": []
                     },
+                    pitch: 60, // pitch in degrees
+                    bearing: -60, // bearing in degrees
                     center: [parseFloat(bounds.southwest_lat), parseFloat(bounds.southwest_lng)],
                     zoom: 9
                 });
@@ -32,26 +34,51 @@ let map = function (morpheus) {
                     padding: 20
                 });
 
+                map.addControl(new mapboxgl.NavigationControl());
+
                 map.on('load', () => {
                     morpheus.api.get('building').then((buildings) => {
                         Object.keys(buildings).forEach((buildingId) => {
                             let building = buildings[buildingId];
 
+                            building.geojson[0].properties.buildingId = buildingId;
+
                             map.addLayer({
-                                "id": buildingId,
-                                "type": "line",
+                                "id": 'building-' + buildingId,
+                                "type": "fill",
                                 "source": {
                                     "type": "geojson",
                                     "data": building.geojson[0]
                                 },
                                 "paint": {
-                                    "line-color": "#888",
-                                    "line-width": 1
+                                    "fill-color": "black",
                                 }
                             });
-
                         });
                     });
+
+                    morpheus.api.get('building_page').then((buildingPages) => {
+                        Object.keys(buildingPages).forEach((buildingPageId) => {
+                            let buildingPage = buildingPages[buildingPageId];
+
+                            map.on('click', 'building-' + buildingPage.building[0], (e) => {
+                                if (morpheus.router.currentRoute.name === 'building' && morpheus.router.currentRoute.params.id === buildingPageId) {
+                                    return;
+                                }
+
+                                morpheus.router.push({ name: 'building', params: { id: buildingPageId }});
+                            });
+                        });
+
+
+                        map.on('click',function (e) {
+                            if (morpheus.router.currentRoute.name !== 'map') {
+                                morpheus.router.push({ name: 'map' });
+                            }
+                        });
+
+                    });
+
                 });
             });
         },

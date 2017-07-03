@@ -4,7 +4,7 @@ export default function (morpheus) {
         props: ['component-id'],
         data: function () {
             morpheus.api.get('image',  this._props.componentId).then((response) => {
-                this.url = morpheus.settings.api + response.url;
+                this.url = response.url;
             });
 
             return {

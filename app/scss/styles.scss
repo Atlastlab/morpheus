@@ -16,3 +16,7 @@ html, body {
 #map {
   height: 100%;
 }
+
+.mapboxgl-ctrl-attrib.mapboxgl-compact::after {
+  display: none !important;
+}

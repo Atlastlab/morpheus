@@ -16,8 +16,9 @@ class Morpheus extends EventEmitter {
     routes = [
         {
             path: '/map', component: map(this),
+            name: 'map',
             children: [
-                { path: 'building/:id', component: building(this) }
+                { path: 'building/:id', component: building(this), name: 'building' }
             ]
         },
     ];
@@ -33,7 +34,7 @@ class Morpheus extends EventEmitter {
         this.registerComponents();
 
         this.settings = settings;
-        this.api = new Api({ baseUrl: this.settings.api });
+        this.api = new Api();
         this.router = new VueRouter({ routes: this.routes });
         this.vueRoot = new Vue({ router: this.router }).$mount('#app');
     }
