@@ -1,4 +1,4 @@
-import mapboxgl from 'mapbox/mapbox-gl-js/dist/mapbox-gl.js';
+import mapboxgl from 'mapbox-gl';
 import 'mapbox/mapbox-gl-js/dist/mapbox-gl.css!css';
 
 let map = function (morpheus) {

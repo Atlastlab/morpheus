@@ -8,13 +8,12 @@
     },
     "dependencies": {
       "OwlCarousel2/OwlCarousel2": "github:OwlCarousel2/OwlCarousel2@^2.2.1",
-      "axios": "npm:axios@^0.16.2",
       "css": "github:systemjs/plugin-css@^0.1.35",
       "jquery": "npm:jquery@^3.2.1",
       "json": "github:systemjs/plugin-json@^0.3.0",
-      "mapbox/mapbox-gl-js": "github:mapbox/mapbox-gl-js@^0.38.0",
+      "mapbox-gl": "npm:mapbox-gl@^0.38.0",
       "studio-fonkel/sprinkhaan": "github:studio-fonkel/sprinkhaan@master",
-      "vue": "npm:vue@^2.3.3",
+      "vue": "npm:vue@^2.3.4",
       "vue-router": "npm:vue-router@^2.5.3"
     },
     "devDependencies": {
@@ -25,17 +24,21 @@
     "peerDependencies": {
       "assert": "npm:jspm-nodelibs-assert@^0.2.0",
       "buffer": "npm:jspm-nodelibs-buffer@^0.2.0",
+      "child_process": "npm:jspm-nodelibs-child_process@^0.2.0",
       "constants": "npm:jspm-nodelibs-constants@^0.2.0",
       "crypto": "npm:jspm-nodelibs-crypto@^0.2.0",
       "events": "npm:jspm-nodelibs-events@^0.2.0",
       "fs": "npm:jspm-nodelibs-fs@^0.2.0",
       "http": "npm:jspm-nodelibs-http@^0.2.0",
-      "https": "npm:jspm-nodelibs-https@^0.2.0",
+      "module": "npm:jspm-nodelibs-module@^0.2.0",
+      "net": "npm:jspm-nodelibs-net@^0.2.0",
       "os": "npm:jspm-nodelibs-os@^0.2.0",
       "path": "npm:jspm-nodelibs-path@^0.2.0",
       "process": "npm:jspm-nodelibs-process@^0.2.0",
+      "source-map": "npm:source-map",
       "stream": "npm:jspm-nodelibs-stream@^0.2.0",
       "string_decoder": "npm:jspm-nodelibs-string_decoder@^0.2.0",
+      "tls": "npm:jspm-nodelibs-tls@^0.2.0",
       "url": "npm:jspm-nodelibs-url@^0.2.0",
       "util": "npm:jspm-nodelibs-util@^0.2.0",
       "vm": "npm:jspm-nodelibs-vm@^0.2.0",
@@ -58,22 +61,8 @@
           "_stream_transform": "readable-stream/transform"
         }
       },
-      "npm:debug@2.6.8": {
-        "main": "src/browser.js",
-        "jspmNodeConversion": false,
-        "format": "cjs",
-        "map": {
-          "./src/browser.js": {
-            "node": "./src/node.js"
-          },
-          "./node.js": {
-            "browser": "./src/browser.js"
-          },
-          "fs": "@node/fs",
-          "net": "@node/net",
-          "tty": "@node/tty",
-          "util": "@node/util"
-        }
+      "npm:esprima@2.7.3": {
+        "jspmNodeConversion": false
       },
       "npm:inherits@2.0.3": {
         "ignore": [
@@ -86,10 +75,37 @@
       "npm:pbkdf2@3.0.12": {
         "main": "browser.js"
       },
-      "npm:safe-buffer@5.0.1": {
-        "browser": "index.js"
+      "npm:readable-stream@1.0.34": {
+        "map": {
+          "stream": "stream-browserify/index"
+        },
+        "systemjs": {
+          "main": "readable.js"
+        },
+        "dependencies": {
+          "core-util-is": "~1.0.0",
+          "isarray": "0.0.1",
+          "string_decoder": "~0.10.0",
+          "inherits": "~2.0.1",
+          "stream-browserify": "~1.0.0"
+        }
       },
-      "npm:safe-buffer@5.1.0": {
+      "npm:readable-stream@1.1.14": {
+        "map": {
+          "stream": "stream-browserify/index"
+        },
+        "systemjs": {
+          "main": "readable.js"
+        },
+        "dependencies": {
+          "core-util-is": "~1.0.0",
+          "isarray": "0.0.1",
+          "string_decoder": "~0.10.0",
+          "inherits": "~2.0.1",
+          "stream-browserify": "~1.0.0"
+        }
+      },
+      "npm:safe-buffer@5.1.1": {
         "browser": "index.js"
       }
     }
@@ -102,8 +118,6 @@
     "gulp-sass": "^3.1.0",
     "gulp-sass-glob": "^1.0.8",
     "jspm": "^0.17.0-beta.39",
-    "proxy-middleware": "^0.15.0",
-    "require-dir": "^0.3.1",
-    "url": "^0.11.0"
+    "require-dir": "^0.3.1"
   }
 }
