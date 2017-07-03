@@ -1,10 +1,11 @@
 import Vue from 'vue/dist/vue.js';
+import 'FortAwesome/Font-Awesome/css/font-awesome.css!';
 import Components from 'morpheus/core/Components.js';
 
 let building = function (morpheus) {
     return {
-        template: `<sprinkhaan v-bind:title="title">
-            <img v-bind:src="image" slot="media">
+        template: `<sprinkhaan :title="title" :icon="icon">
+            <img :src="image" slot="media">
             <component :is="componentsMarkup"></component>
         </sprinkhaan>`,
         beforeRouteEnter (to, from, next) {
@@ -12,6 +13,7 @@ let building = function (morpheus) {
                 let componentsMarkup = new Components(buildingPage.components, morpheus).toNestedMarkup();
                 next(vm => {
                     vm.title = buildingPage.title;
+                    vm.icon = buildingPage.icon;
                     vm.image = morpheus.settings.api + buildingPage.image;
                     vm.componentsMarkup = Vue.extend({ template: componentsMarkup })
                 });
@@ -21,6 +23,7 @@ let building = function (morpheus) {
             return {
                 title: '',
                 image: '',
+                icon: '',
                 componentsMarkup: null,
             }
         }

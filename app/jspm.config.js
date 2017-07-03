@@ -41,7 +41,8 @@ SystemJS.config({
     "web-animations": "github:web-animations/web-animations-js@2.2.5",
     "zingtouch": "github:zingchart/zingtouch@1.0.5",
     "web-animations/web-animations-js": "github:web-animations/web-animations-js@2.2.5",
-    "zingchart/zingtouch": "github:zingchart/zingtouch@1.0.5"
+    "zingchart/zingtouch": "github:zingchart/zingtouch@1.0.5",
+    "mapbox/mapbox-gl-js": "github:mapbox/mapbox-gl-js@0.38.0"
   }
 });
 
@@ -52,6 +53,7 @@ SystemJS.config({
     "github:*/*.json"
   ],
   map: {
+    "FortAwesome/Font-Awesome": "github:FortAwesome/Font-Awesome@4.7.0",
     "assert": "npm:jspm-nodelibs-assert@0.2.1",
     "buffer": "npm:jspm-nodelibs-buffer@0.2.3",
     "child_process": "npm:jspm-nodelibs-child_process@0.2.1",
@@ -72,7 +74,6 @@ SystemJS.config({
     "util": "npm:jspm-nodelibs-util@0.2.2",
     "vm": "npm:jspm-nodelibs-vm@0.2.1",
     "process": "npm:jspm-nodelibs-process@0.2.1",
-    "mapbox/mapbox-gl-js": "github:mapbox/mapbox-gl-js@0.38.0",
     "json": "github:systemjs/plugin-json@0.3.0",
     "vue-router": "npm:vue-router@2.5.3",
     "studio-fonkel/sprinkhaan": "github:studio-fonkel/sprinkhaan@master",
