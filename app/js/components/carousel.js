@@ -6,9 +6,11 @@ export default function () {
     return {
         props: ['component-id'],
         mounted: function () {
-            this.slider = $(this.$el).owlCarousel({
-                items: 1,
-                autoHeight: true
+            setTimeout(() => {
+                this.slider = $(this.$el).owlCarousel({
+                    items: 1,
+                    stagePadding: 20
+                });
             });
         },
         template: '<div class="owl-carousel"><slot></slot></div>'

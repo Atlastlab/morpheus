@@ -14,11 +14,25 @@ let map = function (morpheus) {
                     container: 'map',
                     style: {
                         "version": 8,
-                        "sources": {},
-                        "layers": []
+                        "sources": {
+                            "instance": {
+                                "type": "raster",
+                                "tiles": [
+                                    instance.map
+                                ],
+                                "tileSize": 256
+                            }
+                        },
+                        "layers": [{
+                            "id": "simple-tiles",
+                            "type": "raster",
+                            "source": "instance",
+                            "minzoom": 0,
+                            "maxzoom": 22
+                        }]
                     },
-                    pitch: 60, // pitch in degrees
-                    bearing: -60, // bearing in degrees
+                    pitch: 50,
+                    // bearing: -60,
                     center: [parseFloat(bounds.southwest_lat), parseFloat(bounds.southwest_lng)],
                     zoom: 9
                 });

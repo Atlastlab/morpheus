@@ -5,7 +5,7 @@ import $ from 'jquery';
 
 let building = function (morpheus) {
     return {
-        template: `<sprinkhaan :title="title" :icon="icon">
+        template: `<sprinkhaan :class="{'has-image': image}" :title="title" :icon="icon">
             <img :src="image" slot="media">
             <component :is="componentsMarkup"></component>
         </sprinkhaan>`,

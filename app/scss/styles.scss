@@ -1,10 +1,18 @@
-@import '../lib/github/studio-fonkel/sprinkhaan@master/src/scss/sprinkhaan';
+$primary: #0090b1;
+$gray: #ddd;
+$black: #222;
+$shadow-thickness: .2;
+$padding: 20px;
+
 @import '../lib/github/OwlCarousel2/OwlCarousel2@2.2.1/src/scss/owl.carousel.scss';
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Patua+One');
+@import "sprinkhaan";
 
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+  font-family: 'Open Sans', sans-serif;
 }
 
 #app,
@@ -19,4 +27,38 @@ html, body {
 
 .mapboxgl-ctrl-attrib.mapboxgl-compact::after {
   display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Patua One', cursive;
+  font-weight: 300;
+  margin: 0;
+  letter-spacing: .5px;
+  font-size: 18px;
+  color: $primary;
+}
+
+p {
+  margin-top: 0;
+}
+
+.owl-carousel {
+  margin-left: -$padding;
+  margin-right: -$padding;
+  width: calc(100% + #{$padding * 2});
+}
+
+.owl-item {
+  min-height: 40px;
+
+  img {
+    opacity: .4;
+    transition: opacity .3s;
+  }
+
+  &.active {
+    img {
+      opacity: 1;
+    }
+  }
 }
